@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Movie from './Movie.js'
 
 class MovieList extends React.Component {
@@ -8,9 +7,12 @@ class MovieList extends React.Component {
   }
   render() {
     return (
-      this.props.movies.map((movie, key) => (
+      <div>
+      {this.props.movies.map((movie, key) => (
+
         <Movie movie={movie} key={key}/>
-    ))
+      ))}
+      </div>
     )
   }
 }
