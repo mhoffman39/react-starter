@@ -1,22 +1,30 @@
 import React from 'react';
-import movies from './movieDatabase.js'
 import MovieList from './MovieList.js'
 import Search from './Search.js'
+import AddMovies from './AddMovies.js'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {movies: [],
-                filteredMovies: []}
+    this.state = {
+      movies: [
+        {title: 'Mean Girls'},
+        {title: 'Hackers'},
+        {title: 'The Grey'},
+        {title: 'Sunshine'},
+        {title: 'Ex Machina'}
+      ],
+      filteredMovies: []
+    }
 
-    this.submitForm = this.submitForm.bind(this);
+    this.returnSearch = this.returnSearch.bind(this);
+    this.addMovie = this.addMovie.bind(this);
   }
-  componentDidMount() {
-    this.setState({movies: movies}, ()=> console.log(this.state))
-  }
-  submitForm(returnedMovie) {
-    console.log(this.state, returnedMovie)
+  // componentDidMount() {
+  //   this.setState({movies: movieDatabase}, ()=> console.log(this.state))
+  // }
+  returnSearch(returnedMovie) {
     for (var i = 0; i < this.state.movies.length; i ++) {
       if (this.state.movies[i].title === returnedMovie) {
         var temp = this.state.filteredMovies;
@@ -25,6 +33,11 @@ class App extends React.Component {
         this.setState({filteredMovies: temp})
       }
     }
+  }
+  addMovie(newMovie) {
+    var copyMovies = this.state.movies.slice();
+    copyMovies.push(newMovie);
+    this.setState({movies: copyMovies})
   }
 
   render() {
@@ -38,7 +51,9 @@ class App extends React.Component {
       }
     return (
       <div className="app">
-        <Search onFormSubmit={this.submitForm} />
+        <h1>Movie List</h1>
+        <AddMovies addMovie={this.addMovie} />
+        <Search onFormSubmit={this.returnSearch} />
         {movieDisplay}
       </div>
     )

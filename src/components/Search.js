@@ -21,11 +21,10 @@ class Search extends React.Component {
   render() {
     return (
       <form >
-      <label>
-
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        <label>
+          <input type="text" placeholder="Search..." value={this.state.value} onChange={this.handleChange} />
         </label>
-        <button onClick={this.handleSubmit} >click</button>
+        <button onClick={this.handleSubmit}>Submit</button>
       </form>
     );
   }
